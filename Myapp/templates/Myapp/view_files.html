@@ -1,0 +1,61 @@
+{% load static %}
+
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>View PDF and Excel Files</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ced4da;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>View PDF and Excel Files</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>PDF Files</th>
+                    <th>Excel Files</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pdf_file, excel_file in files %}
+                <tr>
+                    <td><a href="{% static '/media_index/{{ pdf_file }} %}" target="_blank">{{ pdf_file }}</a></td>
+
+                    <td><a href="{% static 'media_index/'|add:excel_file %}" target="_blank">{{ excel_file }}</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

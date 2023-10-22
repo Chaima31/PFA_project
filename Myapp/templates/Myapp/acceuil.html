@@ -1,0 +1,30 @@
+<!-- Inclure les bibliothèques -->
+<head>
+    <!-- Autres balises head... -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+</head>
+
+<body>
+    <!-- Le code HTML du carrousel -->
+    <div class="slick-carousel">
+        <div><img src="la.jpg" alt="Los Angeles"></div>
+        <div><img src="chicago.jpg" alt="Chicago"></div>
+        <div><img src="ny.jpg" alt="New York"></div>
+    </div>
+
+    <!-- Initialisez le carrousel avec JavaScript à la fin de la page -->
+    <script>
+        $(document).ready(function(){
+            $('.slick-carousel').slick({
+                autoplay: true,
+                autoplaySpeed: 2000,
+                dots: true,
+                infinite: true,
+                slidesToShow: 1,
+                slidesToScroll: 1
+            });
+        });
+    </script>
+</body>

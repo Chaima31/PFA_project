@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Edit Bon de commande</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
+
+        :root {
+          --space-root: 1rem;
+          --space-xs: calc(var(--space-root) / 2);
+          --space-s: calc(var(--space-root) / 1.5);
+          --space-m: var(--space-root);
+          --space-l: calc(var(--space-root) * 1.5);
+          --space-xl: calc(var(--space-root) * 2);
+          --color-primary: mediumslateblue;
+          --color-secondary: black;
+          --color-tertiary: hotpink;
+          --base-border-radius: 0.25rem;
+          --ease: cubic-bezier(0.075, 0.82, 0.165, 1);
+          --duration: 350ms;
+          --font-family: 'Roboto', sans-serif;
+          --font-size: 1.25rem;
+        }
+
+        * {
+          box-sizing: border-box;
+        }
+
+        body {
+          display: grid;
+          place-items: center;
+          margin: 0;
+          height: 100vh;
+          padding: var(--space-m);
+          font-size: var(--font-size);
+          font-family: var(--font-family);
+          line-height: 1.2;
+          background: rgb(2,0,36);
+          background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(228,190,219,1) 0%, rgba(149,0,255,1) 99%);
+        }
+
+        a {
+          color: var(--color-primary);
+
+          &:focus {
+            color: var(--color-secondary);
+          }
+        }
+
+        h2 {
+          font-weight: 700;
+          font-size: calc(var(--font-size) * 1.5);
+        }
+
+        .form {
+          position: relative;
+          width: 100%;
+          max-width: 450px;
+          margin: 0 auto;
+          transform: skewY(-5deg) translateY(10%) scale(0.94);
+          transition:
+            box-shadow var(--duration) var(--ease),
+            transform var(--duration) var(--ease);
+
+          &:before,
+          &:after {
+            content: '';
+            position: absolute;
+            pointer-events: none;
+            background-color: darken(white, 8%);
+            width: 25%;
+            height: 100%;
+            transition:
+              background-color var(--duration) var(--ease),
+              transform var(--duration) var(--ease);
+          }
+
+          &:before {
+            top: 0;
+            right: calc(100% - 1px);
+            transform-origin: 100% 100%;
+            transform: skewY(-35deg) scaleX(-1);
+            z-index: -1;
+          }
+
+          &:after {
+            top: 0;
+            left: calc(100% - 1px);
+            transform-origin: 0 0;
+            transform: skewY(-35deg) scaleX(-1);
+            z-index: 2;
+          }
+        }
+
+        .form-inner {
+          padding: var(--space-xl);
+          background-color: white;
+          z-index: 1;
+
+          > * + * {
+            margin-top: var(--space-xl);
+          }
+        }
+
+        .input-wrapper {
+          &:focus-within {
+            label {
+              color: var(--color-secondary);
+            }
+
+            .icon {
+              background-color: var(--color-secondary);
+            }
+
+            input {
+              border-color: var(--color-secondary);
+            }
+          }
+
+          + .input-wrapper {
+            margin-top: var(--space-l);
+          }
+        }
+
+        .input-group {
+          position: relative;
+
+          input {
+            border-radius: var(--base-border-radius);
+            padding-left: calc(var(--space-s) + 60px);
+          }
+
+          .icon {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            border-top-left-radius: var(--base-border-radius);
+            border-bottom-left-radius: var(--base-border-radius);
+            pointer-events: none;
+          }
+        }
+
+        label {
+          font-size: calc(var(--font-size) / 1.65);
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.065rem;
+          display: block;
+          margin-bottom: var(--space-xs);
+          color: var(--color-primary);
+        }
+
+        .icon {
+          display: flex;
+          align-items: center;
+          flex: 0 1 auto;
+          padding: var(--space-m);
+          background-color: var(--color-primary);
+
+          svg {
+            width: 1.25em;
+            height: 1.25em;
+            fill: white;
+            pointer-events: none;
+            user-select: none;
+            transition: transform var(--duration) var(--ease);
+          }
+        }
+
+        input {
+          flex: 1 1 0;
+          width: 100%;
+          outline: none;
+          padding: var(--space-m);
+          font-size: var(--font-size);
+          font-family: var(--font-family);
+          color: var(--color-secondary);
+          border: 2px solid var(--color-primary);
+
+          &:focus {
+            color: var(--color-primary);
+          }
+        }
+
+        .btn-group {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          > * + * {
+            margin-left: var(--space-s);
+          }
+        }
+
+        .btn {
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            outline: none;
+            padding: 12px 24px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            font-family: 'Abel', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: background-color 0.3s ease, color 0.3s ease;
+
+        }
+
+        .btn-primary {
+            background-image: linear-gradient(to bottom, #94bbe9, #eeaeca);
+            color: white;
+        }
+
+        .btn-secondary {
+            background-color: blueviolet;
+            color: white;
+        }
+
+        .btn-cancel {
+           background-image: linear-gradient(to bottom,#eeaeca,#94bbe9);
+            color: white;
+        }
+
+        .btn:hover {
+            background-color: var(--color-secondary);
+            color: white;
+        }
+
+        /* Nouveau style pour le formulaire */
+        .form {
+            position: relative;
+            width: 100%;
+            max-width: 450px;
+            margin: 0 auto;
+            transform: translateY(10%) scale(0.94);
+            transition: box-shadow var(--duration) var(--ease), transform var(--duration) var(--ease);
+
+            &:hover,
+            &:focus-within {
+                transform: scale(1.1);
+                box-shadow: 0 1rem 3rem rgba(black, 0.1);
+
+                &:before,
+                &:after {
+                    background-color: white;
+                    transform: skewY(0);
+                }
+            }
+        }
+
+        /* Style pour les petites zones carrées */
+        .side-squares {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            z-index: 1;
+            transition: background-color var(--duration) var(--ease);
+        }
+
+        .side-square-left {
+            left: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .side-square-right {
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        /* Au survol du formulaire, agrandir et afficher les petites zones carrées */
+        .form:hover,
+        .form:focus-within {
+            transform: translateY(0%) scale(1);
+            box-shadow: 0 1rem 10rem rgba(black, 0.1);
+
+            .side-squares {
+                background-color: white;
+            }
+        }
+
+         .mb-4.text-center {
+
+            font-weight: 700;
+            font-style: italic;
+            color:#ac00e6;
+        }
+
+    </style>
+</head>
+<body>
+   <div class="container">
+
+        <form class="form" method="post">
+
+            {% csrf_token %}
+            <div class="form-inner">
+                <h5 class="mb-4 text-center">Edit commande</h5>
+                <div class="input-wrapper">
+                    <label for="codeArticle">Code Article magasin:</label>
+                    <input type="text" id="codeArticle" name="codeArticle" class="form-control" value="{{ form.Code_Article_magasin.value }}">
+                </div>
+                <div class="input-wrapper">
+                    <label for="codeBarre">Code Barre:</label>
+                    <input type="text" id="codeBarre" name="codeBarre" class="form-control" value="{{ form.Code_Barre.value }}">
+                </div>
+                <div class="input-wrapper">
+                    <label for="designation">Designation article:</label>
+                    <input type="text" id="designation" name="designation" class="form-control" value="{{ form.Designation_article.value }}">
+                </div>
+                <div class="input-wrapper">
+                    <label for="uv">UV:</label>
+                    <input type="text" id="uv" name="uv" class="form-control" value="{{ form.UV.value }}">
+                </div>
+                 <div class="input-wrapper">
+                    <label for="Colisage">UV:</label>
+                    <input type="number" id="Colisage" name="Colisage" class="form-control" value="{{ form.Colisage.value }}">
+                </div>
+            </div>
+
+            <div class="btn-group">
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <a href="{% url 'bondedecommande' %}" class="btn btn-cancel">Cancel</a>
+            </div>
+        </form>
+        <!-- Petites zones carrées à gauche et à droite -->
+        <div class="side-squares side-square-left"></div>
+        <div class="side-squares side-square-right"></div>
+    </div>
+
+    <!-- Intégration des scripts JavaScript de Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,264 @@
+{% load static %}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Convert PDF</title>
+    <!-- Load Bootstrap CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <style>
+
+        body {
+
+  // background-image: url('https://zinecapitalinvest.ma/new_img/blog/11.jpg');
+  background-image: url('https://i.ytimg.com/vi/assrNYZ29Wc/maxresdefault.jpg');
+  background-repeat: no-repeat; /* Empêche la répétition de l'image de fond */
+  background-size: cover; /* Ajuste la taille de l'image de fond pour couvrir tout le contenu */
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 16px;
+  margin:0px
+}
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            padding: 20px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            background-color: #fff;
+            width: 400px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .custom-file-upload {
+            border: 1px solid #007bff;
+            display: inline-block;
+            padding: 6px 12px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .custom-file-upload:hover {
+            background-color: #0056b3;
+        }
+
+        .custom-file-upload:active {
+            background-color: #004999;
+        }
+
+        .custom-file-upload input[type="file"] {
+            display: none;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            border-radius: 5px;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        .btn-primary:active {
+            background-color: #004999;
+            border-color: #004999;
+        }
+
+
+       .custom-card {
+    padding: 20px;
+    background-color: #f2f2f2;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 400px;
+    margin: 0 auto; /* Center the card horizontally */
+    border-radius: 10px;
+    border: 2px solid #ddd;
+    transition: transform 0.3s, background-color 0.3s; /* Ajoutez une transition pour la transformation et la couleur */
+}
+
+
+.custom-card:hover {
+    background-color: #ddeefc; /* Changez la couleur en violet au survol */
+    transform: scale(1.1); /* Agrandissez la carte au survol */
+}
+
+
+
+
+    .custom-file-upload {
+        border: 1px solid #007bff;
+        display: inline-block;
+        padding: 6px 12px;
+        cursor: pointer;
+        background-color: #990300;
+        color: white;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+    .custom-file-upload:hover {
+        background-color: #990300;
+    }
+
+    .custom-file-upload:active {
+        background-color: #990300;
+    }
+
+    .btn-custom {
+    background-color: #990300;
+    border-color: #007bff;
+    border-radius: 5px;
+    color: white;
+    padding: 10px 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ajoutez la box-shadow ici */
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s; /* Ajoutez box-shadow à la transition */
+}
+
+.btn-custom:hover {
+    background-color: #990300;
+    border-color: #990300;
+    color: white;
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Ajoutez une ombre plus prononcée au survol */
+}
+
+.btn-custom:active {
+    background-color: #990300;
+    border-color: #004999;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Ajoutez une ombre légère au clic */
+}
+
+
+    .file-icon {
+        font-size: 24px;
+        display: block;
+        margin-top: 10px;
+    }
+    /* Navbar styling */
+/* Ajoutez ces styles pour la navbar */
+.navbar {
+    background-color: #990300; /* Changer la couleur de la navbar en #990300 */
+    overflow: hidden;
+    position: fixed; /* Utilisez une position fixe pour maintenir la navbar en haut de la page */
+    width: 100%; /* Occupe toute la largeur de la page */
+    top: 0;
+    z-index: 2;
+}
+
+/* Ajustez la marge supérieure du contenu pour éviter de chevaucher la navbar */
+.container {
+    margin-top: 60px; /* La valeur peut varier en fonction de la hauteur de votre navbar */
+}
+
+
+.navbar a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    transition: background-color 0.3s;
+}
+
+.navbar a:hover {
+    background-color: #ffb3ec;
+    color: black;
+}
+
+.navbar a.active {
+    background-color: #ff66d6;
+    color: white;
+}
+
+
+
+
+
+    </style>
+</head>
+<body>
+<!-- Navbar -->
+
+<div class="navbar">
+    <a href="{% url 'commande' %}" class="{% if request.path == 'commande' %}active{% endif %}">
+        <i class="fas fa-home"></i> Accueil
+    </a>
+    <a href="{% url 'bondedecommandes' %}" class="{% if request.path == 'bondedecommandes' %}active{% endif %}">
+        <i class="fas fa-database"></i> Master data
+    </a>
+    <a href="{% url 'clients_table' %}" class="{% if request.path == 'clients_table' %}active{% endif %}">
+        <i class="fas fa-users"></i> Client
+    </a>
+       <a href="{% url 'comparaison_excel' %}" class="{% if request.path == 'clients_table' %}active{% endif %}">
+        <i  class="fas fa-clock"></i> Rapprochement
+    </a>
+        <a href="{% url 'logout_view' %}" class="{% if request.path == 'logout_view' %}active{% endif %}">
+        <i  class="fas fa-sign-out-alt"></i> Déconnexion
+    </a>
+</div>
+<div class="container">
+    <div class="custom-card">
+        <h4 class="text-center mb-4">Convert PDF</h4>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label class="custom-file-upload">
+                    <input type="file" name="pdf_file" accept=".pdf" multiple>
+                    <span class="file-icon">&#128462;</span> <!-- Upload icon -->
+                    Upload PDF
+                </label>
+            </div>
+            <button type="submit" class="btn btn-custom" id="convertBtn">Convert PDF</button>
+            <a class="btn btn-custom" onclick="window.location.href = '{% url 'convert_excel_to_txt' %}'" download> Notepad PDF</a>
+        </form>
+    </div>
+</div>
+
+
+    <script>
+    // Cette fonction ajoutera une classe au clic pour agrandir la carte
+    document.addEventListener('DOMContentLoaded', function() {
+        var convertBtn = document.getElementById('convertBtn');
+        var customCard = document.querySelector('.custom-card');
+        var isCardExpanded = false; // Variable pour suivre l'état de la carte
+
+        convertBtn.addEventListener('click', function() {
+            if (!isCardExpanded) {
+                customCard.style.transform = 'scale(1.1)'; // Agrandissez la carte
+                //customCard.style.backgroundColor = 'violet'; // Changez la couleur en violet
+                isCardExpanded = true;
+            } else {
+                customCard.style.transform = 'scale(1)'; // Revenez à la taille initiale
+                customCard.style.backgroundColor = '#f2f2f2'; // Revenez à la couleur initiale
+                isCardExpanded = false;
+            }
+        });
+    });
+</script>
+
+
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+</body>
+</html>

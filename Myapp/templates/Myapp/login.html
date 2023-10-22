@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <style>
+    html {
+  height: 100%;
+}
+       body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            background-repeat: no-repeat;
+            background-size: cover;
+            /* Ajoutez le chemin de l'image du logo ici */
+            background-image: url('https://www.zinecapitalinvest.ma/new_img/index2/4.jpg');
+            background-position: center center; /* Centre l'image horizontalement et verticalement */
+            background-attachment: fixed; /* Empêche le défilement de l'image avec la page */
+            text-align: center;
+            padding-top: 100px;
+}
+        .form-container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            /*background-color: #bbb; /* Couleur de fond gris foncé */
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-container h2 {
+            color: blueviolet;
+        }
+        .form-group label {
+            font-weight: bold;
+        }
+        .form-control {
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            padding: 8px;
+            margin-bottom: 15px;
+        }
+        .input-icon {
+            position: relative;
+        }
+        .input-icon i {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: blueviolet;
+
+        }
+        .button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            font-weight: 700;
+            background: rgb(255, 255, 255);
+            color: gris;
+            border-radius: .5rem;
+            border: 2px solid gris;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .button:hover {
+            background-color: blueviolet;
+            color: gris;
+        }
+        .forgot-password {
+            text-decoration: underline;
+            color: blueviolet;
+        }
+        .login-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  padding: 40px;
+  transform: translate(-50%, -50%);
+  background: rgba(0,0,0,.5);
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(0,0,0,.6);
+  border-radius: 10px;
+}
+
+.login-box h2 {
+  margin: 0 0 30px;
+  padding: 0;
+  color: #fff;
+  text-align: center;
+}
+
+.login-box .user-box {
+  position: relative;
+}
+
+.login-box .user-box input {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid #fff;
+  outline: none;
+  background: transparent;
+}
+.login-box .user-box label {
+  position: absolute;
+  top:0;
+  left: 0;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  pointer-events: none;
+  transition: .5s;
+}
+
+.login-box .user-box input:focus ~ label,
+.login-box .user-box input:valid ~ label {
+  top: -20px;
+  left: 0;
+  color: #03e9f4;
+  font-size: 12px;
+}
+
+.login-box form a {
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  color: #03e9f4;
+  font-size: 16px;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: .5s;
+  margin-top: 40px;
+  letter-spacing: 4px
+}
+
+.login-box a:hover {
+  background: #03e9f4;
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #03e9f4,
+              0 0 25px #03e9f4,
+              0 0 50px #03e9f4,
+              0 0 100px #03e9f4;
+}
+
+.login-box a span {
+  position: absolute;
+  display: block;
+}
+
+.login-box a span:nth-child(1) {
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #03e9f4);
+  animation: btn-anim1 1s linear infinite;
+}
+
+@keyframes btn-anim1 {
+  0% {
+    left: -100%;
+    }
+  50%,100% {
+    bottom: 100%;
+  }
+}
+
+    </style>
+</head>
+<body>
+    <div class="login-box">
+        <div  class="user-box">
+            <h2>Connexion</h2>
+            <form method="post" >
+                {% csrf_token %}
+                <div class="user-box" >
+
+                    <input type="email" id="email" name="email" class="form-control"  placeholder="Email:" required>
+                </div>
+                <div class="user-box">
+
+                    <input type="password" id="password" name="password" class="form-control" placeholder="Password:" required>
+                </div>
+                 <input type="checkbox" name="remember_me"> Se souvenir de moi<br>
+                <button  type="submit" class="button">Se connecter</button>
+
+            </form>
+        </div>
+    </div>
+
+    <!-- Intégrer les scripts JavaScript et autres éléments si nécessaire -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</body>
+</html>

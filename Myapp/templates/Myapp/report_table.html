@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tableau des clients</title>
+    <!-- Intégration de Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        th, td {
+            font-size: 12px; /* Vous pouvez ajuster la taille de la police selon vos préférences */
+        }
+
+
+    </style>
+</head>
+<body>
+    <!-- Navbar.table-primary {
+            background-color: #007bff;
+        } -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#">Itkane</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+               <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'commande' %}">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'bondedecommandes' %}">Bonde de commande</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'clients_table' %}">Client</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'report_table' %}">Report</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+     <div class="container mt-4">
+        <h5 class="mb-4" style="text-align: center;">Report List</h5>
+        <!-- Champ de recherche -->
+        <div class="form-group row">
+            <div class="col-md-1">
+                <input type="text" class="form-control" id="searchInput" placeholder="Rechercher par nom de client...">
+            </div>
+            <div class="col-md-1">
+
+        </div>
+        </div>
+
+        <!-- ... Le reste du contenu du formulaire de recherche ... -->
+            <div class="table-striped">
+            <!-- Appliquer la même couleur de fond que la navbar au tableau -->
+            <table class="table table-striped">
+                <thead class="thead-info">
+                    <tr>
+                        <th>ID</th>
+                        <th>nb_ligne_pdf</th>
+                        <th>nb_ligne_excel</th>
+                        <th>nb_ligne_excel</th>
+                        <th>nb_ligne_excel</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for report in reports %}
+                    <tr>
+                        <td>{{ report.id }}</td>
+                        <td>{{ report.pdf_filename}}</td>
+                        <td>{{ report.excel_filename}}</td>
+                        <tr>
+                <td><a href="{{ report.pdf_file.url }}">{{ report.pdf_filename }}</a></td>
+                <td><a href="{{ report.excel_file.url }}">{{ report.excel_filename }}</a></td>
+            </tr>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <!-- Pagination -->
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                {% if clients.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1">1</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ clients.previous_page_number }}"><<</a>
+                    </li>
+                {% endif %}
+                {% if clients.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ clients.next_page_number }}">>></a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ clients.paginator.num_pages }}">></a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+    <!-- Intégration des scripts JavaScript de Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Script JavaScript pour la recherche tabulaire -->
+    <script>
+        $(document).ready(function() {
+            $("#searchInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("tbody tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+</body>
+</html>

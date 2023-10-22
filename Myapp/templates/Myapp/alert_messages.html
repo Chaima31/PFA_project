@@ -1,0 +1,21 @@
+{% extends 'commande.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="card">
+        <h4 class="text-center mb-4">Convert PDF</h4>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Alert:</strong>
+            <ul>
+                {% for message in alert_messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <a href="{{ output_excel_file }}" class="btn btn-primary">Download Excel</a>
+    </div>
+</div>
+{% endblock %}

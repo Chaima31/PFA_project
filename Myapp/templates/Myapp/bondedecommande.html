@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tableau des bonde de commandes</title>
+    <!-- Intégration de Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <style>
+
+    /* Custom styles */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+    }
+    .custom-title {
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+        font-weight: 700;
+        font-size: 36px; /* Augmentez cette valeur pour agrandir la taille du titre */
+        color: #7158e2;
+        text-align: center;
+        margin-bottom: 20px;
+        animation: titleAnimation 1s ease-in-out infinite alternate;
+    }
+
+        /* Animation pour le titre */
+        @keyframes titleAnimation {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-5px); }
+        }
+
+    .container {
+        padding-top: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .form-group {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    #searchInput {
+        width: 100%;
+    }
+
+    .btn-custom {
+        background-color: #2db300;
+        color: white;
+        margin-left: 10px;
+    }
+
+    .btn-custom:hover {
+        background-color: #7158e2;
+    }
+
+    .table {
+        background-color: #fff;
+    }
+
+    .table th {
+        background-color: #4d79ff;
+        color: white;
+    }
+
+
+
+    .bg-primary {
+        background-color: #b87aa8 !important;
+    }
+
+    .pagination {
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    /* Additional styles for the navigation bar */
+    .navbar {
+        background-color:  #990300;
+        overflow: hidden;
+        position: sticky;
+        top: 0;
+        z-index: 2;
+
+        display: flex; /* Ajout de cette ligne */
+        justify-content: flex-start; /* Ajout de cette ligne */
+        padding: 1px; /* Ajout de cette ligne */
+    }
+
+    .navbar a {
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+        transition: background-color 0.3s;
+    }
+
+    .navbar a:hover {
+        background-color: #ffb3ec;
+        color: black;
+
+    }
+</style>
+
+</head>
+<body>
+    <!-- Navigation bar -->
+    <div class="navbar">
+
+    <a href="{% url 'commande' %}" class="{% if request.path == 'commande' %}active{% endif %}">
+        <i class="fas fa-home"></i> Accueil
+    </a>
+    <a href="{% url 'bondedecommandes' %}" class="{% if request.path == 'bondedecommandes' %}active{% endif %}">
+        <i class="fas fa-database"></i> Master data
+    </a>
+    <a href="{% url 'clients_table' %}" class="{% if request.path == 'clients_table' %}active{% endif %}">
+        <i class="fas fa-users"></i> Client
+    </a>
+    <a href="{% url 'comparaison_excel' %}" class="{% if request.path == 'clients_table' %}active{% endif %}">
+        <i  class="fas fa-clock"></i> Rapprochement
+    </a>
+        <a href="{% url 'logout_view' %}" class="{% if request.path == 'logout_view' %}active{% endif %}">
+        <i  class="fas fa-sign-out-alt"></i> Déconnexion
+    </a>
+
+</div>
+
+
+
+    <!-- Content -->
+    <div class="container">
+        <h5 class="custom-title">Liste des bon des commandes</h5>
+        <!-- Search field -->
+        <div class="form-group row">
+            <div class="col-md-6">
+                <input type="text" class="form-control" id="searchInput" placeholder="Rechercher par designation article...">
+            </div>
+            <div class="col-md-6">
+                <a class="btn btn-custom" href="{% url 'ajouter_bondedecommande' %}">Ajouter commande</a>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <!-- Apply the same background color as the navbar to the table -->
+            <table class="table table-striped">
+                <thead class="thead-info">
+                    <tr>
+                        <th>Code_Article_magasin</th>
+                        <th>Code_Barre</th>
+                        <th>Designation_article</th>
+                        <th>UV</th>
+                        <th>Colisage</th>
+
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for bondedecommande in bondedecommandes %}
+                    <tr>
+                        <td>{{ bondedecommande.Code_Article_magasin }}</td>
+                        <td>{{ bondedecommande.Code_Barre }}</td>
+                        <td>{{ bondedecommande.Designation_article }}</td>
+                        <td>{{ bondedecommande.UV }}</td>
+                        <td>{{ bondedecommande.Colisage }}</td>
+                        <td>
+                            <!-- Boutons Edit et Delete côte à côte -->
+                            <div class="btn-group" role="group" aria-label="Actions">
+                                <!-- Edit button -->
+                        <a href="{% url 'edit_bondedecommande' bondedecommande.id %}" class="btn btn-warning btn-sm">
+                            <i class="fas fa-pencil-alt"></i>
+                        </a>
+
+                                 <span style="margin: 0 5px;"></span>
+                                <!-- Delete button -->
+                               <form method="post" action="{% url 'delete_bondedecommande' bondedecommande.id %}" style="display: inline;">
+                                {% csrf_token %}
+                                 <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this Code barre?')">
+                                 <i class="fas fa-trash"></i>
+                                </button>
+</form>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <!-- Pagination -->
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                {% if bondedecommandes.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1">1</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ bondedecommandes.previous_page_number }}"><<</a>
+                    </li>
+                {% endif %}
+                {% if bondedecommandes.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ bondedecommandes.next_page_number }}">>></a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ bondedecommandes.paginator.num_pages }}">></a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Intégration des scripts JavaScript de Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Script JavaScript pour la recherche tabulaire -->
+    <script>
+        $(document).ready(function() {
+            $("#searchInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("tbody tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

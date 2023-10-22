@@ -1,0 +1,14 @@
+{% load static %}
+<link href="{% static 'css/navbar.css' %}" rel="stylesheet">
+
+<div class="navbar">
+    <a href="{% url 'commande' %}" class="{% if request.path == 'commande' %}active{% endif %}">
+        <i class="fas fa-home"></i> Accueil
+    </a>
+    <a href="{% url 'bondedecommandes' %}" class="{% if request.path == 'bondedecommandes' %}active{% endif %}">
+        <i class="fas fa-database"></i> Master data
+    </a>
+    <a href="{% url 'clients_table' %}" class="{% if request.path == 'clients_table' %}active{% endif %}">
+        <i class="fas fa-users"></i> Client
+    </a>
+</div>

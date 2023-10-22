@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Commande Page</title>
+    <!-- Add your CSS styles here -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+        font-family: "Roboto", sans-serif;
+        background-image: url('https://i.ytimg.com/vi/assrNYZ29Wc/maxresdefault.jpg');
+        background-repeat: no-repeat; /* Empêche la répétition de l'image de fond */
+        background-size: cover; /* Ajuste la taille de l'image de fond pour couvrir tout le contenu */
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        }
+
+        .container {
+            width: 1000px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin: auto;
+            margin-top: 290px;
+        }
+
+        .container .btn {
+            position: relative;
+            top: 0;
+            left: 0;
+            width: 250px;
+            height: 50px;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container .btn a {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 15px 15px rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            padding: 10px;
+            letter-spacing: 1px;
+            text-decoration: none;
+            overflow: hidden;
+            color: #fff;
+            font-weight: 400px;
+            z-index: 1;
+            transition: 0.5s;
+            backdrop-filter: blur(15px);
+        }
+
+        .container .btn:hover a {
+            letter-spacing: 3px;
+        }
+
+        .container .btn a::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to left, rgba(255, 255, 255, 0.15), transparent);
+            transform: skewX(45deg) translate(0);
+            transition: 0.5s;
+            filter: blur(0px);
+        }
+
+        .container .btn:hover a::before {
+            transform: skewX(45deg) translate(200px);
+        }
+
+        .container .btn::before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            transform: translatex(-50%);
+            bottom: -5px;
+            width: 30px;
+            height: 10px;
+            background: #f00;
+            border-radius: 10px;
+            transition: 0.5s;
+            transition-delay: 0.5;
+        }
+
+        .container .btn:hover::before /*lightup button*/ {
+            bottom: 0;
+            height: 50%;
+            width: 80%;
+            border-radius: 30px;
+        }
+
+        .container .btn::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            transform: translatex(-50%);
+            top: -5px;
+            width: 30px;
+            height: 10px;
+            background: #f00;
+            border-radius: 10px;
+            transition: 0.5s;
+            transition-delay: 0.5;
+        }
+
+        .container .btn:hover::after /*lightup button*/ {
+            top: 0;
+            height: 50%;
+            width: 80%;
+            border-radius: 30px;
+        }
+
+        .container .btn:nth-child(1)::before,
+        .container .btn:nth-child(1)::after {
+            background: #ff1f71;
+            box-shadow: 0 0 5px #ff1f71, 0 0 15px #ff1f71, 0 0 30px #ff1f71,
+                0 0 60px #ff1f71;
+        }
+
+        .container .btn:nth-child(2)::before,
+        .container .btn:nth-child(2)::after {
+            background: #2db2ff;
+            box-shadow: 0 0 5px #2db2ff, 0 0 15px #2db2ff, 0 0 30px #2db2ff,
+                0 0 60px #2db2ff;
+        }
+
+        .container .btn:nth-child(3)::before,
+        .container .btn:nth-child(3)::after {
+            background: #1eff45;
+            box-shadow: 0 0 5px #1eff45, 0 0 15px #1eff45, 0 0 30px #1eff45,
+                0 0 60px #1eff45;
+        }
+
+.container .btn:nth-child(4) {
+    position: relative;
+    top: 70px; /* Ajustez la valeur pour déplacer le bouton "Autre" vers le bas */
+    margin-left: 10px; /* Ajoutez de la marge à gauche du bouton "Autre" */
+}
+.container .btn:nth-child(5) {
+    position: relative;
+    top: 70px; /* Ajustez la valeur pour déplacer le bouton "Autre" vers le bas */
+    margin-left: 10px; /* Ajoutez de la marge à gauche du bouton "Autre" */
+}
+.container .btn:nth-child(6) {
+    position: relative;
+    top: 70px; /* Ajustez la valeur pour déplacer le bouton "Autre" vers le bas */
+    margin-left: 10px; /* Ajoutez de la marge à gauche du bouton "Autre" */
+}
+
+.navbar a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    transition: background-color 0.3s;
+}
+
+.navbar a:hover {
+    background-color: #ffb3ec;
+    color: black;
+}
+
+.navbar a.active {
+    background-color: #ff66d6;
+    color: white;
+}
+/* Ajoutez ces styles pour la navbar */
+.navbar {
+    background-color: #990300; /* Changer la couleur de la navbar en #990300 */
+    overflow: hidden;
+    position: fixed; /* Utilisez une position fixe pour maintenir la navbar en haut de la page */
+    width: 100%; /* Occupe toute la largeur de la page */
+    top: 0;
+    z-index: 2;
+}
+
+
+
+
+
+
+
+
+    </style>
+</head>
+<body>
+<!-- Navbar -->
+
+<div class="navbar">
+    <a href="{% url 'commande' %}" class="{% if request.path == 'commande' %}active{% endif %}">
+        <i class="fas fa-home"></i> Accueil
+    </a>
+    <a href="{% url 'clients_table' %}" class="{% if request.path == 'clients_table' %}active{% endif %}">
+        <i class="fas fa-users"></i> Client
+    </a>
+    <a href="{% url 'bondedecommandes' %}" class="{% if request.path == 'bondedecommandes' %}active{% endif %}">
+        <i class="fas fa-database"></i> Master data
+    </a>
+    <a href="{% url 'comparaison_excel' %}" class="{% if request.path == 'comparaison_excel' %}active{% endif %}">
+        <i  class="fas fa-clock"></i> Rapprochement
+    </a>
+    <a href="{% url 'logout_view' %}" class="{% if request.path == 'logout_view' %}active{% endif %}">
+        <i  class="fas fa-sign-out-alt"></i> Déconnexion
+    </a>
+
+
+</div>
+<!-- Content -->
+    <div class="container">
+        <div class="btn" onclick="window.location.href = '{% url 'index' %}'"><a href="#">Marjane /acima</a></div>
+        <div class="btn"  onclick="window.location.href = '{% url 'download_links' %}'"><a href="#">Carrefour/LABEL VIE</a></div>
+        <div class="btn" onclick="window.location.href = '{% url 'convert_pdf_to_excel_express' %}'"><a href="#">U Express</a></div>
+        <div class="btn" onclick="window.location.href = '{% url 'indexx' %}'"><a href="#">MAXI LV</a></div>
+        <div class="btn" onclick="window.location.href = '{% url 'indexxx' %}'"><a href="#">ASWAK  tobigo</a></div>
+        <div class="btn" onclick="window.location.href = '{% url 'index4' %}'"><a href="#">ASwak al itkane</a></div>
+    </div>
+
+</body>
+</html>
